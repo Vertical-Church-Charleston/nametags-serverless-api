@@ -6,7 +6,7 @@ export function main(event, context, callback) {
   try {
     const S3 = new AWS.S3();
     const params = {
-      Bucket: process.env.S3DBBucketName, 
+      Bucket: 'nametags-database', 
       Key: `record-${event.pathParameters.id}.json`
     };
     S3.getObject(params, function(error, data) {

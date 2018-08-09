@@ -15,7 +15,7 @@ export function main(event, context, callback) {
       try {
         const S3 = new AWS.S3();
         const getParams = {
-          Bucket: process.env.S3DBBucketName, 
+          Bucket: 'nametags-database', 
           Key: `record-${event.pathParameters.id}.json`
         };
         S3.getObject(getParams, function (error, data){
@@ -27,7 +27,7 @@ export function main(event, context, callback) {
             object.firstName = tag.firstName;
             object.lastName = tag.lastName;
             const updateParams = {
-              Bucket: process.env.S3DBBucketName, 
+              Bucket: 'nametags-database', 
               Key: `record-${event.pathParameters.id}.json`,
               Body: JSON.stringify(object)
             };
@@ -38,7 +38,7 @@ export function main(event, context, callback) {
               } else {
                 callback(null, success(object));
                 const getList = {
-                  Bucket: process.env.S3DBBucketName, 
+                  Bucket: 'nametags-database', 
                   Key: `list.json`
                 };
                 S3.getObject(getList, function (error, data){
@@ -55,7 +55,7 @@ export function main(event, context, callback) {
                     })
                     const listParams = {
                       Body: JSON.stringify(list), 
-                      Bucket: process.env.S3DBBucketName, 
+                      Bucket: 'nametags-database', 
                       Key: `list.json`
                     }
                     S3.putObject(listParams, function(error) {

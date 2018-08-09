@@ -7,7 +7,7 @@ export function main(event, context, callback) {
   try {
     const S3 = new AWS.S3();
     const deleteParams = {
-      Bucket: process.env.S3DBBucketName, 
+      Bucket: 'nametags-database', 
       Key: `record-${event.pathParameters.id}.json`
     };
     S3.deleteObject(deleteParams, function(error) {
@@ -17,7 +17,7 @@ export function main(event, context, callback) {
       } else {
         callback(null, success({ status: 204 }));
         const getParams = {
-          Bucket: process.env.S3DBBucketName, 
+          Bucket: 'nametags-database', 
           Key: `list.json`
         };
         S3.getObject(getParams, function(error, data) {
@@ -28,7 +28,7 @@ export function main(event, context, callback) {
             list = remove(list, n => n.id === event.pathParameters.id);
             const listParams = {
               Body: JSON.stringify(list), 
-              Bucket: process.env.S3DBBucketName, 
+              Bucket: 'nametags-database', 
               Key: `list.json`
             }
             S3.putObject(listParams, function(error) {

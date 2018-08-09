@@ -1,8 +1,6 @@
 import AWS from "aws-sdk";
 import uuid from "uuid";
-import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
-import { isEmpty } from 'lodash';
 const JSONAPIDeserializer = require('jsonapi-serializer').Deserializer;
 const TagDeserializer = new JSONAPIDeserializer({
   keyForAttribute: 'camelCase'
@@ -26,7 +24,7 @@ export function main(event, context, callback) {
         }
         const params = {
           Body: JSON.stringify(props), 
-          Bucket: process.env.S3DBBucketName, 
+          Bucket: 'nametags-database', 
           Key: `record-${props.id}.json`
         };
         S3.putObject(params, function(error) {
@@ -38,7 +36,7 @@ export function main(event, context, callback) {
           }
         });
         const getParams = {
-          Bucket: process.env.S3DBBucketName, 
+          Bucket: 'nametags-database', 
           Key: `list.json`
         };
         S3.getObject(getParams, function(error, data) {
@@ -49,7 +47,7 @@ export function main(event, context, callback) {
             list.push(props);
             const listParams = {
               Body: JSON.stringify(list), 
-              Bucket: process.env.S3DBBucketName, 
+              Bucket: 'nametags-database', 
               Key: `list.json`
             }
             S3.putObject(listParams, function(error) {
