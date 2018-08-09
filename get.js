@@ -1,25 +1,25 @@
-import * as dynamoDbLib from "./libs/dynamodb-lib";
+import AWS from "aws-sdk";
 import { success, failure } from "./libs/response-lib";
+AWS.config.update({ region: "us-east-1" });
 
-export async function main(event, context, callback) {
-  const params = {
-    TableName: process.env.tableName,
-    // 'Key' defines the partition key and sort key of the item to be retrieved
-    // - 'tagId': path parameter
-    Key: {
-      tagId: event.pathParameters.id
-    }
-  };
-
+export function main(event, context, callback) {
   try {
-    const result = await dynamoDbLib.call("get", params);
-    if (result.Item) {
-      // Return the retrieved item
-      callback(null, success(result.Item));
-    } else {
-      callback(null, failure({ status: false, error: "Item not found." }));
-    }
-  } catch (e) {
-    callback(null, failure({ status: false }));
+    const S3 = new AWS.S3();
+    const params = {
+      Bucket: process.env.S3DBBucketName, 
+      Key: `record-${event.pathParameters.id}.json`
+    };
+    S3.getObject(params, function(error, data) {
+      if (error) {
+        console.log(error);
+        callback(null, failure({ status: false, error }));
+      } else {
+        console.log(data);
+        callback(null, success(JSON.parse(data.Body)));
+      }
+    });
+  } catch (e) {;
+    console.log(e);
+    callback(null, failure({ status: false, error: e }));
   }
 }
