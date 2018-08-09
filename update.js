@@ -9,7 +9,6 @@ AWS.config.update({ region: "us-east-1" });
 export function main(event, context, callback) {
   const data = JSON.parse(event.body);
   TagDeserializer.deserialize(data, function (error,tag){
-    console.log(tag);
     if(error){
       callback(null, failure({ status: false, error }));
     } else {
@@ -47,7 +46,6 @@ export function main(event, context, callback) {
                     console.log(error);
                   } else {
                     let list = JSON.parse(data.Body);
-                    console.log(list);
                     list = list.map((obj) => {
                       if (obj.id === event.pathParameters.id) {
                         obj.firstName = tag.firstName;
