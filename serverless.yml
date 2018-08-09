@@ -91,3 +91,5 @@ functions:
           cors: true
 # Create our resources with separate CloudFormation templates
 resources:
+  # S3DB
+  - ${file(resources/s3-database.yml)}
