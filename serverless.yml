@@ -28,6 +28,8 @@ provider:
   # These environment variables are made available to our functions
   # under process.env.
   environment:
+    S3DBBucketName:
+      Ref: NametagsDatabaseBucket
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
