@@ -2,6 +2,7 @@ Resources:
   NametagsDatabaseBucket:
     Type: AWS::S3::Bucket
     Properties:
+      BucketName: nametags-database
       # Set the CORS policy
       CorsConfiguration:
         CorsRules:
@@ -17,9 +18,18 @@ Resources:
               - DELETE
               - HEAD
             MaxAge: 3000
-
-# Print out the name of the bucket that is created
-Outputs:
-  NametagsDatabaseBucketName:
-    Value:
-      Ref: NametagsDatabaseBucket
+  NametagsDatabaseBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: nametags-database
+      PolicyDocument:
+        Statement:
+          - Sid: PublicReadGetObject
+            Effect: Allow
+            Principal: "*"
+            Action:
+            - "s3:DeleteObject"
+            - "s3:GetObject"
+            - "s3:PutObject"
+            Resource:
+              - arn:aws:s3:::nametags-database/*
