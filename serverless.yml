@@ -76,7 +76,7 @@ functions:
     events:
       - http:
           path: tags/{id}
-          method: put
+          method: patch
           cors: true
 
   delete:
