@@ -19,18 +19,19 @@ custom:
     webpackConfig: ./webpack.config.js
     includeModules: true
   environment: ${file(env.yml):${self:custom.stage}, file(env.yml):default}
+  s3Sync:
+    - bucketName: nametags-database
+      localDir: database
 
 provider:
   name: aws
   runtime: nodejs8.10
   stage: dev
   region: us-east-1
+  profile: verticalchurch
 
   # These environment variables are made available to our functions
   # under process.env.
-  environment:
-    S3DBBucketName:
-      Ref: NametagsDatabaseBucket
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
