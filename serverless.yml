@@ -2,6 +2,7 @@ service: vcc-nametags-api
 
 # Use the serverless-webpack plugin to transpile ES6
 plugins:
+  - serverless-s3-sync
   - serverless-webpack
   - serverless-offline
   - serverless-ding
