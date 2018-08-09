@@ -1,5 +1,15 @@
+const JSONAPISerializer = require('jsonapi-serializer').Serializer;
+const TagSerializer = new JSONAPISerializer('tags', {
+  attributes: ['firstName', 'lastName','__id__'],
+  keyForAttribute: 'camelCase',
+});
+
 export function success(body) {
-  return buildResponse(200, body);
+  if (body.hasOwnProperty('status') && body.status !== 200) {
+    return buildResponse(body.status);
+  } else {
+    return buildResponse(200, TagSerializer.serialize(body));
+  }
 }
 
 export function failure(body) {
