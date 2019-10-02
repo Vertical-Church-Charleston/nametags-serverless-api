@@ -36,7 +36,7 @@ export function main(event, context, callback) {
                 console.log(error);
                 callback(null, failure({ status: false, error }));
               } else {
-                callback(null, success(object));
+                callback(null, success({body: object}));
                 const getList = {
                   Bucket: 'nametags-database', 
                   Key: `list.json`

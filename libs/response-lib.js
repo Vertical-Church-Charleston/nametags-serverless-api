@@ -4,25 +4,29 @@ const TagSerializer = new JSONAPISerializer('tags', {
   keyForAttribute: 'camelCase',
 });
 
-export function success(body) {
-  if (body.hasOwnProperty('status') && body.status !== 200) {
-    return buildResponse(body.status);
-  } else {
-    return buildResponse(200, TagSerializer.serialize(body));
-  }
+export function success(response, isPrint) {
+  return buildResponse(response, isPrint);
 }
 
-export function failure(body) {
-  return buildResponse(500, body);
+export function failure(response) {
+  return buildResponse({...response, statusCode: 500});
 }
 
-function buildResponse(statusCode, body) {
-  return {
-    statusCode: statusCode,
+function buildResponse(response, isPrint) {
+  const defaultResponse = {
+    statusCode: 200,
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Credentials": true
     },
-    body: JSON.stringify(body)
   };
+  let newResponse = {
+    ...defaultResponse,
+    ...response
+  }
+  let body;
+  if (!isPrint) {
+    newResponse.body = JSON.stringify(TagSerializer.serialize(response.body))
+  }
+  return newResponse;
 }

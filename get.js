@@ -15,7 +15,7 @@ export function main(event, context, callback) {
         callback(null, failure({ status: false, error }));
       } else {
         console.log(data);
-        callback(null, success(JSON.parse(data.Body)));
+        callback(null, success({body: JSON.parse(data.Body)}));
       }
     });
   } catch (e) {;

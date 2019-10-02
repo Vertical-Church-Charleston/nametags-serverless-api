@@ -15,7 +15,7 @@ export function main(event, context, callback) {
         console.log(error);
         callback(null, failure({ status: false, error }));
       } else {
-        callback(null, success({ status: 204 }));
+        callback(null, success({ statusCode: 204 }));
         const getParams = {
           Bucket: 'nametags-database', 
           Key: `list.json`
@@ -25,7 +25,7 @@ export function main(event, context, callback) {
             console.log(error);
           } else {
             let list = JSON.parse(data.Body);
-            list = remove(list, n => n.id === event.pathParameters.id);
+            remove(list, n => n.id === event.pathParameters.id);
             const listParams = {
               Body: JSON.stringify(list), 
               Bucket: 'nametags-database', 

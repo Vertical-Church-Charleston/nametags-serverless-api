@@ -32,7 +32,7 @@ export function main(event, context, callback) {
             console.log(error);
             callback(null, failure({ status: false, error }));
           } else {
-            callback(null, success(props));
+            callback(null, success({body: props}));
           }
         });
         const getParams = {

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Name Tag Studio Print</title>
+  <style>
+    @font-face {
+      font-family: "Gibson";
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Regular.eot");
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Regular.eot?#iefix") format("embedded-opentype"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Regular.woff") format("woff"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Regular.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: "Gibson";
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-BoldItalic.eot");
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-BoldItalic.eot?#iefix") format("embedded-opentype"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-BoldItalic.woff") format("woff"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-BoldItalic.ttf") format("truetype");
+      font-weight: bold;
+      font-style: italic;
+    }
+
+    @font-face {
+      font-family: "Gibson";
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-LightIt.eot");
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-LightIt.eot?#iefix") format("embedded-opentype"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-LightIt.woff") format("woff"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-LightIt.ttf") format("truetype");
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    @font-face {
+      font-family: "Gibson";
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Italic.eot");
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Italic.eot?#iefix") format("embedded-opentype"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Italic.woff") format("woff"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Italic.ttf") format("truetype");
+      font-weight: normal;
+      font-style: italic;
+    }
+
+    @font-face {
+      font-family: "Gibson";
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Light.eot");
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Light.eot?#iefix") format("embedded-opentype"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Light.woff") format("woff"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Light.ttf") format("truetype");
+      font-weight: 300;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: "Gibson";
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Bold.eot");
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Bold.eot?#iefix") format("embedded-opentype"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Bold.woff") format("woff"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Bold.ttf") format("truetype");
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: "Gibson";
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-SemiBold.eot");
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-SemiBold.eot?#iefix") format("embedded-opentype"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-SemiBold.woff") format("woff"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-SemiBold.ttf") format("truetype");
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: "Gibson";
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-SemiboldIt.eot");
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-SemiboldIt.eot?#iefix") format("embedded-opentype"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-SemiboldIt.woff") format("woff"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-SemiboldIt.ttf") format("truetype");
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    @font-face {
+      font-family: "Gibson";
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Regular_1.eot");
+      src: url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Regular_1.eot?#iefix") format("embedded-opentype"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Regular_1.woff") format("woff"),
+        url("https://s3.amazonaws.com/name-tag-studio-server/assets/fonts/Gibson-Regular_1.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+    }
+    @page {
+      size: 8.5in 11in portrait;
+      margin: 0in;
+    }
+    body {
+      font-family: "Gibson",sans-serif;
+      margin: 0;
+      color: white;
+      -webkit-print-color-adjust: exact;
+    }
+    .tag-component {
+      position: relative;
+      overflow: hidden;
+      position: relative;
+      width: 216px;
+      margin-top: 72px;
+      margin-left: 59.9999998px;
+      float: left;
+    }
+    .tag-component img {
+      width: 100%;
+    }
+    .tag-component:nth-of-type(5n) {
+      margin-bottom: 72px;
+      page-break-before: always;
+    }
+    .tag-component .name {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1;
+      text-align: center;
+      height: 36.3%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .tag-component .name span {
+      font-weight: 600;
+      line-height: 1.2em;
+      display: block;
+    }
+    .tag-component .name {
+      height: 40%;
+    }
+    .tag-component .name .first-name, .tag-component .name .last-name {
+      font-size: 35px;
+      text-transform: capitalize;
+      color: #0C90BC;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    {{#each tags as |tag|}}
+      <div class="tag-component">
+        <div class="name">
+          <span class="first-name">{{tag.firstName}}</span>
+          <span class="last-name">{{tag.lastName}}</span>
+        </div>
+        <img src="https://s3.amazonaws.com/name-tag-studio-server/assets/images/name-tag.png">
+      </div>
+      <div class="tag-component">
+        <div class="name">
+          <span class="first-name">{{tag.firstName}}</span>
+          <span class="last-name">{{tag.lastName}}</span>
+        </div>
+        <img src="https://s3.amazonaws.com/name-tag-studio-server/assets/images/name-tag.png">
+      </div>
+    {{/each}}
+  </main>  
+</body>
+</html>

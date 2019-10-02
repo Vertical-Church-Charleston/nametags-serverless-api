@@ -2,6 +2,8 @@ service: vcc-nametags-api
 
 # Use the serverless-webpack plugin to transpile ES6
 plugins:
+  - serverless-apigw-binary
+  - serverless-apigwy-binary
   - serverless-s3-sync
   - serverless-webpack
   - serverless-offline
@@ -22,6 +24,9 @@ custom:
   s3Sync:
     - bucketName: nametags-database
       localDir: database
+  apigwBinary:
+    types:
+      - "application/pdf"
 
 provider:
   name: aws
@@ -91,6 +96,15 @@ functions:
           path: tags/{id}
           method: delete
           cors: true
+
+  printtags:
+    handler: print.main
+    events:
+      - http:
+          path: printtags
+          method: get
+          cors: true
+          contentHandling: CONVERT_TO_BINARY
 # Create our resources with separate CloudFormation templates
 resources:
   # S3DB
