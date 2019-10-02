@@ -31,6 +31,7 @@
     "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
+    "api2pdf": "^1.1.0",
     "babel-runtime": "^6.26.0",
     "handlebars": "^4.0.11",
     "html-pdf": "^2.2.0",

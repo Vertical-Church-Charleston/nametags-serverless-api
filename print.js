@@ -3,12 +3,11 @@ import fs from "fs";
 import { success, failure } from "./libs/response-lib";
 import Handlebars from "handlebars";
 var pdf = require('html-pdf');
-const unirest = require("unirest");
-const wkhtmltopdf = require("./libs/wkhtmltopdf");
-const conversion = require("phantom-html-to-pdf")({
-  phantomPath: require("phantomjs-prebuilt").path
-});
+var Api2Pdf = require('api2pdf');   
 AWS.config.update({ region: "us-east-1" });
+
+const api2pdfkey = "5c983cc9-97c4-4d7b-8003-d7a75ca525ad"
+var a2pClient = new Api2Pdf(api2pdfkey);
 
 // const pdfOptions = { format: 'Letter', phantomPath: './phantomjs_lambda/phantomjs_linux-x86_64' };
 // const S3config = { bucketName: 'name-tag-studio-server' }; //Change to your bucket name
@@ -39,21 +38,33 @@ export function main(event, context, callback) {
           console.log(template);
           const html = template({ tags: tags });
           console.log(html);
-          pdf.create(html, {}).toStream(function(err, stream) {
-            if (err) return console.log(err);
-            console.log(stream);
+          const pdfOptions = { pageSize: 'Letter', marginTop: 0, marginRight: 0, marginBottom: 0, marginLeft: 0, printMediaType: true, zoom: 1.25 };
+          const date = new Date();
+          const fileName = `name-tags-${date.getDate()}-${date.getMonth()}-${date.getFullYear()}.pdf`;
+          a2pClient.wkhtmltopdfFromHtml(html, false, fileName, pdfOptions).then(function(result) {
+            console.log(result)
             let response = {
               statusCode: 200,
-              headers: {
-                'Content-type' : 'application/pdf',
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Credentials": true
-              },
-              body: stream.toString('base64'),
-              isBase64Encoded : true,
+              body: result.pdf
             };
-            callback(null, success({body: response}));
+            console.log(response)
+            callback(null, success({body: response}, true));
           });
+          // pdf.create(html, {}).toBuffer(function(err, buffer) {
+          //   if (err) return console.log(err);
+          //   // console.log(buffer);
+          //   let response = {
+          //     statusCode: 200,
+          //     headers: {
+          //       'Content-type' : 'application/pdf',
+          //       "Access-Control-Allow-Origin": "*",
+          //       "Access-Control-Allow-Credentials": true
+          //     },
+          //     body: buffer.toString('base64'),
+          //     isBase64Encoded : true,
+          //   };
+          //   callback(null, success({body: response}));
+          // });
         });
       }
     });

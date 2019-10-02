@@ -104,7 +104,6 @@ functions:
           path: printtags
           method: get
           cors: true
-          contentHandling: CONVERT_TO_BINARY
 # Create our resources with separate CloudFormation templates
 resources:
   # S3DB
