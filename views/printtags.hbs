@@ -106,21 +106,21 @@
       color: white;
       -webkit-print-color-adjust: exact;
     }
+    .tag-wrapper {
+      height: 5.5in;
+      width: 8.5in;
+    }
     .tag-component {
       position: relative;
       overflow: hidden;
       position: relative;
       width: 3in;
-      margin-top: 1in;
+      margin-top: 0.75in;
       margin-left: 0.83333333in;
       float: left;
     }
     .tag-component img {
       width: 100%;
-    }
-    .tag-component:nth-of-type(5n) {
-      margin-bottom: 1in;
-      page-break-before: always;
     }
     .tag-component .name {
       position: absolute;
@@ -152,20 +152,22 @@
 <body>
   <main>
     {{#each tags as |tag|}}
-      <div class="tag-component">
-        <div class="name">
-          <span class="first-name">{{tag.firstName}}</span>
-          <span class="last-name">{{tag.lastName}}</span>
+      <section class="tag-wrapper">
+        <div class="tag-component">
+          <div class="name">
+            <span class="first-name">{{tag.firstName}}</span>
+            <span class="last-name">{{tag.lastName}}</span>
+          </div>
+          <img src="https://s3.amazonaws.com/name-tag-studio-server/assets/images/name-tag.png">
         </div>
-        <img src="https://s3.amazonaws.com/name-tag-studio-server/assets/images/name-tag.png">
-      </div>
-      <div class="tag-component">
-        <div class="name">
-          <span class="first-name">{{tag.firstName}}</span>
-          <span class="last-name">{{tag.lastName}}</span>
+        <div class="tag-component">
+          <div class="name">
+            <span class="first-name">{{tag.firstName}}</span>
+            <span class="last-name">{{tag.lastName}}</span>
+          </div>
+          <img src="https://s3.amazonaws.com/name-tag-studio-server/assets/images/name-tag.png">
         </div>
-        <img src="https://s3.amazonaws.com/name-tag-studio-server/assets/images/name-tag.png">
-      </div>
+      </section>
     {{/each}}
   </main>  
 </body>
