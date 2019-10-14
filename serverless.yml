@@ -21,9 +21,9 @@ custom:
     webpackConfig: ./webpack.config.js
     includeModules: true
   environment: ${file(env.yml):${self:custom.stage}, file(env.yml):default}
-  s3Sync:
-    - bucketName: nametags-database
-      localDir: database
+  # s3Sync:
+  #   - bucketName: nametags-database
+  #     localDir: database
   apigwBinary:
     types:
       - "application/pdf"
