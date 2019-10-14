@@ -11,7 +11,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AnomalyInnovations/serverless-nodejs-starter.git"
+    "url": "https://github.com/Vertical-Church-Charleston/nametag-serverless-api"
   },
   "devDependencies": {
     "aws-sdk": "^2.224.1",
