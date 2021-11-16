@@ -14,7 +14,7 @@
     "url": "https://github.com/Vertical-Church-Charleston/nametag-serverless-api"
   },
   "devDependencies": {
-    "aws-sdk": "^2.224.1",
+    "aws-sdk": "^2.814.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-plugin-source-map-support": "^1.0.0",
